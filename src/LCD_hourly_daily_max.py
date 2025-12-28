@@ -11,6 +11,10 @@ from metpy.calc import heat_index
 from metpy.units import units
 import time
 import os
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 
 def pd_index(database,column,status):#returns the first index in a column with a certain value (status)
@@ -179,9 +183,11 @@ def LCD_analyze(currentDir,fileNames,endYears,currentProduct,RHavgall):#returns 
 
 
 def LCD_hourly_daily_max(base):
+    logger.info('Beginning LCD Analysis')
     stop,update,city=0,False,0#set up variables for initial run
     while stop==0:
         currentCity,currentDir,currentStation,fileNames,startYears,endYears,stopCity=progress_controller(update=update,city=city,base=base)#pull all variables needed to analyze this city
+        logger.info('Analyzing City: %s'%currentCity)
         currentProduct=HV_csv(startYears,endYears)#create the blank csv
         RHavgall=[0,0] #2-d array with [sum, number of entries] for calculating the overall RH for a city
         
@@ -194,8 +200,11 @@ def LCD_hourly_daily_max(base):
         currentProduct.insert(9,'RHavgOverall',[RHoverall]*len(currentProduct),True)#add it to the product database
 
         #save file
+        logger.info('Saving Daily Info for City: %s'%currentCity)
         currentProduct.to_csv(base+currentDir+currentStation+' daily maxes %s - %s.csv'%(startYears[0],endYears[-1]))
         update=True#rewrite status of analyzed city on next loop
         city=currentCity#name of city analyzed
+        logger.info('Done with LCD of city: %s'%currentCity)
         if city==stopCity:stop=1
+    logger.info('Done With LCD Analysis')
     return
