@@ -25,7 +25,12 @@ def month_translator(months):#given start and end months, return 3 letter abriev
         return 'annual'
     
 import pandas as pd
+import logging
+
+logger = logging.getLogger(__name__)
+
 def log_maker(root,months,years,dtype='all'):
+    logger.info('Initializing Log Maker')
     types=['Tmax','Tavg','RHmax','RHavg','HImax','HIavg','WBTmax','WBTavg']
     if dtype=='all':
         taskList=types
@@ -44,6 +49,11 @@ def log_maker(root,months,years,dtype='all'):
         if not years:
             yearNames='all time'
         else: yearNames=str(years[0])+'-'+str(years[1])
+        logger.info('Saving City log for %s'%dtype)
         log.to_csv(root+'city logs %s %s %s.csv'%(dtype,monthNames,yearNames))
+        logger.info('Completed City log for %s'%dtype)
+    
+    logger.info('Completed City log creation')
+    return
 
 
