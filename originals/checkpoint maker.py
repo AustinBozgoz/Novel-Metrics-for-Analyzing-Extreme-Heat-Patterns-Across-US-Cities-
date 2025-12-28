@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 function='new' #choices include new (new checkpoint spreadsheet),clear/fill status/graph/both (reset/fill status or graph columns or both)
-root='C:\\Users\\bozgo\\OneDrive - University of Miami\\research projects\\Tmax pdfs'
+root=''
 
 
 if function=='new':
@@ -41,4 +41,5 @@ else:
             product.loc[i,'status']=instructions[0]
         if instructions[1]!='null':
             product.loc[i,'graphs']=instructions[1]
+
 product.to_csv('checkpoint.csv')
