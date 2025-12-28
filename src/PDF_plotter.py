@@ -13,6 +13,9 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 from scipy import stats
 import os
+import logging
+
+logger = logging.getLogger(__name__)
 
 #define functions for determining graph variables
 def miami_PDF(root,TauNames,checkpoint='checkpoint.csv',months=[],years=[]):#tests if miami has been analyzed, and if not registers the city log info needed for the rest of the program
@@ -299,10 +302,11 @@ def PDF_maker(root,Tau,months,years,TauName,miamiMax,cityName,stationID,folder,c
         log.to_csv(root+'City logs\\city logs '+TauName+' '+monthNames+' '+yearNames+'.csv')
     return
 
-def PDF_plotter_prototype(root,months,years,city=False,record_city_logs=True,HI_overlay=True):
+def PDF_plotter(root,months,years,city=False,record_city_logs=True,HI_overlay=True):
     TauNames=['Tmax','Tavg','RHmax','RHavg','HImax','HIavg','WBTmax','WBTavg']
     checkpoint='checkpoint.csv'
-
+    
+    logger.info('Begin PDF plotting')
     #miamiMaxes=miami_PDF(root,TauNames=TauNames,months=months,years=years)#gather miami max99
     miamiMaxes=[0]*8 #edit this out if you want to use another city in comparison, you might also want to rename the variables
     if city!=False:#for a specific city
@@ -316,11 +320,14 @@ def PDF_plotter_prototype(root,months,years,city=False,record_city_logs=True,HI_
         city=None
         while stop==0:
             file,cityDir,stationID,stopCity=PDF_progress(root,update=update,city=city)
+            logger.info('Analyzing %s'%stationID)
             Tau=tau_loader(root+file,months,years)#read file and store tau columns in tuple
             for i in range(len(TauNames)):
+                logger.info('Creating PDF %s %s'%(stationID,TauNames[i]))
                 PDF_maker(root,Tau,months,years,TauNames[i],miamiMaxes[i],cityDir,stationID,folder=root+cityDir+'\\'+stationID+'\\',city=False,HI_overlay=HI_overlay,record_city_logs=record_city_logs)
             update=True#update the city we just did
             city=cityDir
+            logger.info('Done with City'%stationID)
             if city==stopCity:stop=1
     return
 
