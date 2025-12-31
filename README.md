@@ -32,7 +32,7 @@ Resilence: Implemeneted a global logging system in order to track which csv's or
 
 Performance: Implemeneted a combination of numpy vectorization and standard python loops in order to optimize performance of high-volume datasets and ensure accuracy of calculations.
 
-################# Getting Started ######################
+
 
 # Clone the repo
 git clone https://github.com/AustinBozgoz/Novel-Metrics-for-Analyzing-Extreme-Heat-Patterns-Across-US-Cities-
