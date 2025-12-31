@@ -14,7 +14,7 @@ def checkpoint_maker(function,base):
         for item in dirNames:
             if item=='MIA second try': stationIDs.append('')
             else: 
-                for root,dirs,files in os.walk(item):
+                for root,dirs,files in os.walk(base+item):
                     for labels in dirs:
                         if len(labels)!=0:
                             if labels[-3:]=='LCD':
@@ -46,10 +46,11 @@ def checkpoint_maker(function,base):
             if instructions[1]!='null':
                 product.loc[i,'graphs']=instructions[1]
     logger.info('Producing final Checkpoint')
-    product.to_csv('checkpoint.csv')
+    product.to_csv(base+'checkpoint.csv')
     logger.info('Checkpoint Complete')
     return 
 
 
 
 #function='new' #choices include new (new checkpoint spreadsheet),clear/fill status/graph/both (reset/fill status or graph columns or both)
+
