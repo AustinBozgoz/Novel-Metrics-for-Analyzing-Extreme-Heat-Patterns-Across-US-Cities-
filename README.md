@@ -1,6 +1,6 @@
 # Automated Daily Maximum Transformation Pipeline for the National Oceananic and Atmospheric Administration's Local Climatological Database
 
-Developed a robust ETL (extract, transform, load) pipeline for converting long-term hourly weather data the National Oceaning and Atmospheric Administration's Local Climatological Database (LCD) into daily maximum quantities useful for atmospheric and public health inquries. The program imports hourly readings of temperature and relative humidity, makes corrections for or ignores erroneous entries, and outputs daily maximum readings for Temperature, Heat index, Wet-bulb temperature, and Relative Humidity for every city given to it. It also creates probability distribution plots for those values for each city, and consolidates statistical information for each one of those cities into one large database, allowing for easy comparisons of extreme heat behavior for cities across the United States or even the world.
+Developed a robust ETL (extract, transform, load) pipeline for converting long-term hourly weather data the National Oceaning and Atmospheric Administration's Local Climatological Database (LCD) into daily maximum/average quantities useful for atmospheric and public health inquries. The program imports hourly readings of temperature and relative humidity, makes corrections for or ignores erroneous entries, and outputs daily maximum/average readings for Temperature, Heat index, Wet-bulb temperature, and Relative Humidity for every city given to it. It also creates probability distribution plots for those values for each city, and consolidates statistical information for each one of those cities into one large database, allowing for easy comparisons of extreme heat behavior for cities across the United States or even the world.
 
 # Technical Information:
 
@@ -18,7 +18,7 @@ Error Correction: Checks hourly readings and removes letters from entries, ignor
 
 Processing: Uses MetPy for unit-aware calculations (e.g. Heat Index) and Scipy for probability distribution plot analysis as well as outlier detection.
 
-Output: Generates cleaned data, hourly readings of daily maximum temperature, heat index, wet-bulb temperature, relative humidity; generates probability distribution plots of those variables for each city; generates a log of quantitative descriptors for those probability distribution plots for comparing extreme values between cities.
+Output: Generates cleaned data, hourly readings of daily maximum/average temperature, heat index, wet-bulb temperature, relative humidity; generates probability distribution plots of those variables for each city; generates a log of quantitative descriptors for those probability distribution plots for comparing extreme values between cities.
 
 # Key Features:
 
