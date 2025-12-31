@@ -1,0 +1,3 @@
+,city,station,category,avg,std,skew,n,min,max99,True_max,median,mode,AAOMM,AAO90,95Q,ACDO90,ACDOMM,Urange,Delta,RHavgOverall
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,"Miami, FL",MIA LCD,RHmax,88.65754175,7.678785818,-0.967343064,3653,52,100,100,90,90,328.8,147.1,100,4.111782477,0,11.34245825,11.34245825,72.39957584
