@@ -148,9 +148,9 @@ def PDF_progress(base,checkpoint='checkpoint.csv',update=False,city=None):#track
         for i in range(len(files)):
             if 'daily maxes' in files[i]:
                 fileName=files[i]
-    file=base+cityDir+'\\'+stationID+'\\'+fileName
-    stopCity=masterFile['dirNames'][-1]
-    return file,cityDir,stationID        
+    file=cityDir+'\\'+stationID+'\\'+fileName
+    stopCity=masterFile['dirNames'].iloc[-1]
+    return file,cityDir,stationID,stopCity     
         
 def tau_loader(file,months=[],years=[]):#imports daily values files and preps histogram data
     #load data and select timeline
@@ -213,7 +213,7 @@ def PDF_maker(root,Tau,months,years,TauName,miamiMax,cityName,stationID,folder,c
     fig=plt.figure(figsize=(24,8))
     plt.hist(column,density=True,bins=bins,color='black')
     plt.ylabel('Probability',fontsize='32')
-    plt.xlabel('avg=%.3f  std=%.3f  skew=%.3f #points=%i min=%.3f max99=%.3f median=%.3f mode=%.3f'%(np.average(column),np.std(column),stats.skew(column),len(column),TauMin,TauMax99,np.median(column),stats.mode(column)[0][0]),fontsize='24')
+    plt.xlabel('avg=%.3f  std=%.3f  skew=%.3f #points=%i min=%.3f max99=%.3f median=%.3f mode=%.3f'%(np.average(column),np.std(column),stats.skew(column),len(column),TauMin,TauMax99,np.median(column),stats.mode(column)[0]),fontsize='24')
     plt.xticks(np.arange(TauMin-TauMin%5,TauMax-TauMax%5+5,5),fontsize='28')
     plt.yticks(fontsize='28')
     plt.title('Probability of daily %s recorded at %s for %s %s'%(TauName,stationID,monthNames,yearNames))
@@ -270,7 +270,7 @@ def PDF_maker(root,Tau,months,years,TauName,miamiMax,cityName,stationID,folder,c
             Pexdan/=len(column)
             row={'city':cityName,'station':stationID,'category':TauName,'avg':np.average(column),
                         'std':np.std(column),'skew':stats.skew(column),'n':len(column),'min':min(column),
-                        'max99':TauMax99,'True_max':max(column),'median':np.median(column),'mode':stats.mode(column)[0][0],
+                        'max99':TauMax99,'True_max':max(column),'median':np.median(column),'mode':stats.mode(column)[0],
                         'AAOMM':AAOMM,'AAO90':AAOthreshold,'95Q':Q95,'ACDO90':ACDOthreshold,'ACDOMM':ACDOMM,
                         'Urange':Urange,'Delta':Delta,'RHavgOverall':Tau['RHavgOverall'].iloc[0],'Pcau':Pcau,'POcau':POcau,'Pexcau':Pexcau,
                         'POexcau':POexcau,'Pdan':Pdan,'POdan':POdan,'Pexdan':Pexdan}
@@ -278,14 +278,14 @@ def PDF_maker(root,Tau,months,years,TauName,miamiMax,cityName,stationID,folder,c
         elif 'WBT' in TauName:
             row={'city':cityName,'station':stationID,'category':TauName,'avg':np.average(column),
                         'std':np.std(column),'skew':stats.skew(column),'n':len(column),'min':min(column),
-                        'max99':TauMax99,'True_max':max(column),'median':np.median(column),'mode':stats.mode(column)[0][0],
+                        'max99':TauMax99,'True_max':max(column),'median':np.median(column),'mode':stats.mode(column)[0],
                         'AAOMM':AAOMM,'AAO80':AAOthreshold,'95Q':Q95,'ACDO80':ACDOthreshold,'ACDOMM':ACDOMM,
                         'Urange':Urange,'Delta':Delta,'RHavgOverall':Tau['RHavgOverall'].iloc[0]}
     
         else:
             row={'city':cityName,'station':stationID,'category':TauName,'avg':np.average(column),
                         'std':np.std(column),'skew':stats.skew(column),'n':len(column),'min':min(column),
-                        'max99':TauMax99,'True_max':max(column),'median':np.median(column),'mode':stats.mode(column)[0][0],
+                        'max99':TauMax99,'True_max':max(column),'median':np.median(column),'mode':stats.mode(column)[0],
                         'AAOMM':AAOMM,'AAO90':AAOthreshold,'95Q':Q95,'ACDO90':ACDOthreshold,'ACDOMM':ACDOMM,
                         'Urange':Urange,'Delta':Delta,'RHavgOverall':Tau['RHavgOverall'].iloc[0]}
         row=pd.DataFrame(row,index=[len(log)])
@@ -299,7 +299,7 @@ def PDF_maker(root,Tau,months,years,TauName,miamiMax,cityName,stationID,folder,c
                 delete=True
         if delete==True: del log[clear_row]
         print(log)
-        log.to_csv(root+'City logs\\city logs '+TauName+' '+monthNames+' '+yearNames+'.csv')
+        log.to_csv(root+'City_logs\\city logs '+TauName+' '+monthNames+' '+yearNames+'.csv')
     return
 
 def PDF_plotter(root,months,years,city=False,record_city_logs=True,HI_overlay=True):
@@ -327,9 +327,10 @@ def PDF_plotter(root,months,years,city=False,record_city_logs=True,HI_overlay=Tr
                 PDF_maker(root,Tau,months,years,TauNames[i],miamiMaxes[i],cityDir,stationID,folder=root+cityDir+'\\'+stationID+'\\',city=False,HI_overlay=HI_overlay,record_city_logs=record_city_logs)
             update=True#update the city we just did
             city=cityDir
-            logger.info('Done with City'%stationID)
+            logger.info('Done with City %s'%stationID)
             if city==stopCity:stop=1
     return
+
 
 
 
