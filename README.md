@@ -23,3 +23,12 @@ Output: Generates cleaned data, hourly readings of daily maximum temperature, he
 Key Features:
 
 Modular Design: Every major Step of the ETL pipeline is seperated into a different script and outputs its transformation into a seperate and meticulously labelled database. This allows for versatility of use for this project not only to find extreme heat values but to also utilize daily maximum values from any city within the LCD database. The error correction function is also cleanly seperated as a standalone function, allowing for any future programmer to easily clean and utilize the LCD database for any project.
+
+Unit Based Calculations: Incorporated metpy in order to ensure consistent use of fahrenheit for all heat-index related calculations
+
+Versatility: Utilized directory packages and organization to permit for a theoretically unlimited number of cities within the analysis. Also included simple controls for the sake of limiting the analysis timeframe to any month or year range as specified by the user.
+
+Resilence: Implemeneted a global logging system in order to track which csv's or cities are corrupted.
+
+Performance: Implemeneted a combination of numpy vectorization and standard python loops in order to optimize performance and accuracy of calculations.
+
