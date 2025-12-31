@@ -19,3 +19,7 @@ Error Correction: Checks hourly readings and removes letters from entries, ignor
 Processing: Uses MetPy for unit-aware calculations (e.g. Heat Index) and Scipy for probability distribution plot analysis as well as outlier detection.
 
 Output: Generates cleaned data, hourly readings of daily maximum temperature, heat index, wet-bulb temperature, relative humidity; generates probability distribution plots of those variables for each city; generates a log of quantitative descriptors for those probability distribution plots for comparing extreme values between cities.
+
+Key Features:
+
+Modular Design: Every major Step of the ETL pipeline is seperated into a different script and outputs its transformation into a seperate and meticulously labelled database. This allows for versatility of use for this project not only to find extreme heat values but to also utilize daily maximum values from any city within the LCD database. The error correction function is also cleanly seperated as a standalone function, allowing for any future programmer to easily clean and utilize the LCD database for any project.
