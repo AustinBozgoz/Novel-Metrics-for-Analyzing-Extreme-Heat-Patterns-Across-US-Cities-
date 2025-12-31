@@ -50,14 +50,14 @@ def progress_controller(checkpoint='checkpoint.csv',update=False,city=None,base=
     
     ###>write file names
     fileNames,startYears,endYears=[],[],[]
-    for root,dirs,files in os.walk(currentDir):
+    for root,dirs,files in os.walk(base+currentDir):
         for item in files:
             if (item[-3:]=='csv') and (item[0:7]==stationID[0:3]+'_LCD'):
                 fileNames.append(item)
                 startYears.append(item[8:12])
                 endYears.append(item[8:11]+'9')
     
-    stopCity=masterFile['dirNames'][-1]
+    stopCity=masterFile['dirNames'].iloc[-1]
     return currentCity,currentDir,stationID,fileNames,startYears,endYears,stopCity
 
 
@@ -208,3 +208,4 @@ def LCD_hourly_daily_max(base):
         if city==stopCity:stop=1
     logger.info('Done With LCD Analysis')
     return
+
