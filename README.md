@@ -14,8 +14,8 @@ Project Architecture:
 
 Data Input: Reads raw csv's from NOAA's LCD database (https://www.ncdc.noaa.gov/cdo-web/datatools/lcd). The database only permits data downloading one decade at a time, and as such you must download the information each decade starting at January 1st at the beginning of the decade (or whenever the sation first started collecting information) to the last day in the decade (as in December 31st, the 9th year of the decade). E.g. for the 1980s of a particular station, the csv should be dated from January 1st, 1980 to December 31st, 1989. If the station started in 1985, it is also acceptable to use a csv of [Any month] [Any day], 1985 to December 31st, 1989. Manual Adjustments to the code will need to be made in order to include csv's of more recent years (i.e. past 2019)
 
-Validation: Checks for schema consistency and missing values.
+Error Correction: Checks hourly readings and removes letters from entries, ignores blank entries, checks that values are reasonable (e.g. temperature is not in the thousands of degrees)
 
-Processing: Uses MetPy for unit-aware calculations (e.g., Heat Index) and Scipy for outlier detection.
+Processing: Uses MetPy for unit-aware calculations (e.g. Heat Index) and Scipy for probability distribution plot analysis as well as outlier detection.
 
-Output: Generates cleaned data and summary visualizations.
+Output: Generates cleaned data, hourly readings of daily maximum temperature, heat index, wet-bulb temperature, relative humidity; generates probability distribution plots of those variables for each city; generates a log of quantitative descriptors for those probability distribution plots for comparing extreme values between cities.
