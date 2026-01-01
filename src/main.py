@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-months=[]
-years=[]
-
+months=[] #month range to analyze
+years=[] #year range to analyze
+sql_database='LCD Analysis' #name for sql databases
 
 import os
 import sys
@@ -9,6 +9,7 @@ import checkpoint_maker
 import LCD_hourly_daily_max
 import PDF_plotter
 import log_maker
+import sql_databaser
 import logging
 
 logging.basicConfig(
@@ -30,9 +31,11 @@ def main(months,years):
     log_maker(current_directory+'\\NOAA_LCD_CSVs\\City_logs\\',months=months,years=years)
     logging.info('Creating PDFs....')
     PDF_plotter(current_directory+'\\NOAA_LCD_CSVs\\',months=months,years=years)
+    logging.info('Creating SQL Database...')
+    sql_databaser(current_directory+'\\NOAA_LCD_CSVs\\',sql_database)
     logging.info('Program Complete')
     return
 
 if __name__ == "__main__":
-    main(months,years)
+    main(months,years,sql_database)
     
