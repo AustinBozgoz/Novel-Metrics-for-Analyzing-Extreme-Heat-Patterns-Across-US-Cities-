@@ -18,7 +18,7 @@ Error Correction: Checks hourly readings and removes letters from entries, ignor
 
 Processing: Uses MetPy for unit-aware calculations (e.g. Heat Index) and Scipy for probability distribution plot analysis as well as outlier detection.
 
-Output: Generates cleaned data, hourly readings of daily maximum/average temperature, heat index, wet-bulb temperature, relative humidity; generates probability distribution plots of those variables for each city; generates a log of quantitative descriptors for those probability distribution plots for comparing extreme values between cities.
+Output: Generates cleaned data, hourly readings of daily maximum/average temperature, heat index, wet-bulb temperature, relative humidity; generates probability distribution plots of those variables for each city; generates a log of quantitative descriptors for those probability distribution plots for comparing extreme values between cities. Also generates 2 large SQL databases: one for all the daily maxes searchable by city/station, another for all the probability distribution descriptors searchable by month range, year range, and heat descriptor.
 
 # Key Features:
 
