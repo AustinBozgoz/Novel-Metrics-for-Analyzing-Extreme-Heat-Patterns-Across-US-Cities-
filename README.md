@@ -6,7 +6,7 @@ Developed a robust ETL (extract, transform, load) pipeline for converting long-t
 
 Language: Python 3.11+
 
-Libraries: Pandas,SQLalchemy (Dataframes), NumPy (Matrix Math), MetPy (Atmospheric calcs), Scipy (Stats), Matplotlib (Visualization).
+Libraries: Pandas, SQLalchemy (Dataframes), NumPy (Matrix Math), MetPy (Atmospheric calcs), Scipy (Stats), Matplotlib (Visualization).
 
 Infrastructure: Logging (System monitoring).
 
