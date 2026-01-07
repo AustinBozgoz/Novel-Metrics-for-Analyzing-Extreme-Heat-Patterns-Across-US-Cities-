@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 def checkpoint_maker(function,base):
     if function=='new':
         dirNames=os.listdir(base+'')
-        dirNames=[item for item in dirNames if (item[-3:]!='.py') and (item[-3:]!='csv') and (item[-3:]!='png') and (item!='City logs') and (item[0:5]!='maryb') and (item[0:5]!='MIA t')]
+        dirNames=[item for item in dirNames if (item[-3:]!='.py') and (item[-3:]!='csv') and (item[-3:]!='png') and (item!='City_logs') and (item[0:5]!='maryb') and (item[0:5]!='MIA t')]
 
         stationIDs=[]
         logger.info('Loading Directories')
@@ -53,4 +53,5 @@ def checkpoint_maker(function,base):
 
 
 #function='new' #choices include new (new checkpoint spreadsheet),clear/fill status/graph/both (reset/fill status or graph columns or both)
+
 
