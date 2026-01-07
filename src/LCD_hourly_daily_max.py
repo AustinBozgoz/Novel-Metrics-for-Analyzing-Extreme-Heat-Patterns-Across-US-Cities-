@@ -169,7 +169,15 @@ def LCD_analyze(currentDir,fileNames,endYears,currentProduct,RHavgall):#returns 
             if filePosition==len(fileNames):#prevent loading nonexistent files
                 print('error trying to load too many files')
                 input()
-            else:data=load_LCD(currentDir,fileNames,filePosition)#load data
+            else:
+                data=load_LCD(currentDir,fileNames,filePosition)#load data
+                #compute values for jan 1st of the first year of the new file
+                print(currentDir)
+                print('%i/%i'%(i,len(currentProduct)))#print progress
+                results,RHavgall=daily_max(data,date,RHavgall)#get results
+                currentProduct=HV_writer(results,currentProduct,date)#record results
+                print(currentProduct.loc[i])#print results
+                print(RHavgall)
         else:
             print(currentDir)
             print('%i/%i'%(i,len(currentProduct)))#print progress
@@ -208,4 +216,5 @@ def LCD_hourly_daily_max(base):
         if city==stopCity:stop=1
     logger.info('Done With LCD Analysis')
     return
+
 
