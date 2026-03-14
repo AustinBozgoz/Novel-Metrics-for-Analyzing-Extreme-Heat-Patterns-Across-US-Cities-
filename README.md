@@ -1,6 +1,6 @@
 # !!!!! This version of the code is deprecated !!!!!
 # Link to the current version of this code: https://github.com/AustinBozgoz/LCD-Daily-Max-Avg-Downloader-and-Converter
-# This respository is used to house my master's thesis and older versions of this code
+# This respository is used to house my master's thesis and older versions of related code
 
 
 # Automated Daily Maximum Transformation Pipeline for the National Oceananic and Atmospheric Administration's Local Climatological Database
